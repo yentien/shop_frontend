@@ -1,0 +1,7 @@
+{
+  "compileOntions": {
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "module": "ES2015"
+  }
+}
