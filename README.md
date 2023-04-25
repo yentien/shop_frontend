@@ -5,5 +5,5 @@
 - Vue Router 路由管理
 - Vuex 全局狀態管理
 - axios 串接後端api
-- 組件化模板
+- 元件化模板
 - html、css
