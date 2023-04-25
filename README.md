@@ -2,7 +2,7 @@
 ## 使用技術
 - Vue3
 - Vuex全局狀態管理
-- Vue Router
-- axios (與用spring boot撰寫的後端串接api)
+- Vue Router前端路由管理
+- axios發起請求/接收回應HTTP
 - html
 - css
