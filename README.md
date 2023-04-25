@@ -1,2 +1,2 @@
 # shop_frontend
-Vue電商網站實作
+電商網站實作(前端Vue)
