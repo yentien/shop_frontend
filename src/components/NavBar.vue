@@ -40,7 +40,7 @@
           </ul>
         </div>
       </div>
-      <router-link to="/cart">
+      <router-link :to="`/user/${user.userId}/cart`">
         <!-- <TheIcon icon="cart"></TheIcon> -->
         <img
           src="../assets/cart.svg"
