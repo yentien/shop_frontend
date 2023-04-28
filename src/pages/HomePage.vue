@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="category">
+    <!-- <div class="category">
       <ul class="categoryList">
         <li>分類1</li>
         <li>分類2</li>
@@ -25,7 +25,7 @@
         <li>分類4</li>
         <li>分類5</li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>

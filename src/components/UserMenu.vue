@@ -36,19 +36,26 @@
           >商品管理</router-link
         >
       </li> -->
-      <!-- <li @click="logout"><a>登出</a></li> -->
+      <li @click="logout"><a>登出</a></li>
     </ul>
   </div>
 </template>
 <script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { router } from "../routes";
 
 const store = useStore();
 
 const user = computed(() => {
   return store.getters.getUser;
 });
+
+async function logout() {
+  await store.dispatch("logoutUser");
+  router.push("/");
+  alert("您已登出!");
+}
 </script>
 <style scoped>
 ul > li > .currentRoute {

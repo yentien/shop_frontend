@@ -12,13 +12,13 @@
         />
         <label for="username">用戶名: </label>
         <input class="midLengthInput" type="text" v-model="userData.name" />
-        <label for="username">電話: </label>
+        <label for="cellphone">電話: </label>
         <input
           class="midLengthInput"
           type="text"
           v-model="userData.cellphone"
         />
-        <label for="username">地址: </label>
+        <label for="address">地址: </label>
         <input class="longLengthInput" type="text" v-model="userData.address" />
         <label>性別: </label>
         <div class="genderRadios">
@@ -75,22 +75,6 @@ function refreshPage() {
   alert("已取消變更!");
   location.reload();
 }
-
-// const userName = ref("");
-// const userCellphone = ref("");
-// const userAddress = ref("");
-// const userGender = ref("");
-// const gender = ref("");
-// if (userGender == "male") {
-//   gender.value = "M";
-// } else if (userGender == "female") {
-//   gender.value = "F";
-// }
-
-// userName.value = user.value.name;
-// userCellphone.value = user.value.cellphone;
-// userAddress.value = user.value.Address;
-// userGender.value = user.value.Gender;
 </script>
 <style scoped>
 .userPage {
@@ -130,6 +114,10 @@ function refreshPage() {
 }
 
 .longLengthInput {
+  width: 600px;
+}
+
+.userEdite {
   width: 600px;
 }
 </style>
