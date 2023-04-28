@@ -7,6 +7,7 @@ import CategoryPage from "./pages/CategoryPage.vue";
 import Orders from "./pages/Orders.vue"
 import UserOrders from "./pages/UserOrdersPage.vue"
 import AdminPage from "./pages/AdminPage.vue"
+import OrderInfoPage from "./pages/OrderInfoPage.vue"
 import { createRouter, createWebHistory } from "vue-router";
 import { getJwtToken } from "./apis/auth";
 
@@ -32,7 +33,7 @@ const routes = [
     component: UserOrders,
   },
   {
-    path: "/cart",
+    path: "/user/:userId/cart",
     name: "cart",
     component: CartPage,
   },
@@ -55,6 +56,11 @@ const routes = [
     path: "/orders",
     name: "orders",
     component: Orders,
+  },
+  {
+    path: "/user/:userId/ordersInfo",
+    name: "userOrderInfo",
+    component: OrderInfoPage,
   },
 ]
 

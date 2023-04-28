@@ -47,20 +47,21 @@
           />
         </div>
       </div>
+      <h2 v-if="cartProductList.length == 0">購物車沒有商品!</h2>
     </div>
 
     <div class="totalInfo">
       <p>購物車總計</p>
       <div class="subTotal">
         <p>小計</p>
-        <p>NT${{ sumPrice }}</p>
+        <p>NT${{ sumPrice - shippingFee }}</p>
       </div>
       <TheSeparateLine></TheSeparateLine>
 
       <div class="shippingMethod">
         <p>運送方式</p>
         <ul>
-          <li>
+          <!-- <li>
             <label for="sevenEleven">超商取貨:7-ELEVEN: NT$60</label>
             <input
               type="radio"
@@ -79,7 +80,7 @@
               v-model="shippingMethod"
               @change="updateTotalAmount"
             />
-          </li>
+          </li> -->
           <li>
             <label for="postOffice">宅配:郵局: NT$100</label>
             <input
@@ -90,7 +91,11 @@
               @change="updateTotalAmount"
             />
           </li>
-          <li>
+          <br />
+          <br />
+          <br />
+          <br />
+          <!-- <li>
             <label for="tCat">宅配:黑貓: NT$130</label>
             <input
               type="radio"
@@ -99,7 +104,7 @@
               v-model="shippingMethod"
               @change="updateTotalAmount"
             />
-          </li>
+          </li> -->
         </ul>
       </div>
       <TheSeparateLine></TheSeparateLine>
@@ -108,7 +113,9 @@
         <p>總計</p>
         <p>NT${{ sumPrice }}</p>
       </div>
-      <TheButton @click="CheckOut" class="checkOutButton">前往結帳</TheButton>
+      <TheButton @click="CheckOut(user.userId)" class="checkOutButton"
+        >前往結帳</TheButton
+      >
     </div>
   </div>
 </template>
@@ -117,11 +124,18 @@ import TheSeparateLine from "../components/TheSeparateLine.vue";
 import TheButton from "../components/TheButton.vue";
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-const shippingMethod = ref("");
-const shippingFee = ref(0);
+const router = useRouter();
+
+const shippingMethod = ref("postOffice");
+const shippingFee = ref(100);
 
 const store = useStore();
+
+const user = computed(() => {
+  return store.getters.getUser;
+});
 
 onMounted(() => {
   store.dispatch("getCart");
@@ -211,8 +225,12 @@ function updateTotalAmount() {
   }
 }
 
-function CheckOut() {
-  // console.log(cartProductList.value);
+function CheckOut(userId) {
+  if (cartProductList.length > 0) {
+    router.push(`/user/${userId}/ordersInfo`);
+  } else {
+    alert("購物車沒有商品!");
+  }
 }
 </script>
 <style scoped>
