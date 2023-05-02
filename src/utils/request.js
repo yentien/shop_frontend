@@ -21,27 +21,14 @@ export async function request(
     });
     return res;
   } catch (error) {
-
-    // console.log(error.response.status);
-    // 如果status是401，就呼叫logout函式
     if (error.response.status === 401) {
-      alert("請重新登入!");
-      await store.dispatch("logoutUser");
-      router.push("/login");
+      if (router.currentRoute.value.fullPath === "/login") {
+        alert("帳號或密碼有誤!")
+      } else {
+        alert("請重新登入!");
+        await store.dispatch("logoutUser");
+        router.push("/login");
+      }
     }
   }
-
-  // 這邊可以對請求錯誤做初步的處裡
-  // if (res.status > 400) {
-
-  // }
-  // if (res.status == 401) {
-  //   await store.dispatch("logoutUser");
-  // }
-
-  // console.log(res.status)
-  // console.log(res)
-  // 加上status屬性
-
-
 }

@@ -63,11 +63,15 @@ async function register() {
 }
 
 async function login() {
-  await store.dispatch("loginUser", {
-    email: email.value,
-    password: password.value,
-  });
-  router.replace("/");
+  if (email.value === "" || password.value === "") {
+    alert("帳號和密碼不能為空!");
+  } else {
+    await store.dispatch("loginUser", {
+      email: email.value,
+      password: password.value,
+    });
+    router.replace("/");
+  }
 }
 </script>
 <style scoped>
