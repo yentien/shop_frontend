@@ -3,7 +3,7 @@
     <div class="productList">
       <div class="productItem" v-for="product in productList" :key="product.id">
         <img
-          :src="product.imgUrl"
+          :src="product.imageUrl"
           alt=""
           width="100%"
           height="100%"

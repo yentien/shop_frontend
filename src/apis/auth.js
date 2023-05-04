@@ -80,3 +80,45 @@ export async function modifyUserApi(user) {
   return response.data;
 
 }
+
+// 取得所有user
+export async function getUserListApi() {
+  const response = await request(
+    `http://localhost:8080/admin/users`,
+    {
+      method: "GET",
+      auth: true,
+      data: {}
+    });
+  return response.data;
+}
+
+// 取得要modify的user
+export async function getModifyUserApi(userId) {
+  const response = await request(
+    `http://localhost:8080/admin/users/${userId}`,
+    {
+      method: "GET",
+      auth: true,
+      data: {}
+    });
+  return response.data;
+}
+
+// admin modify user
+export async function adminModifyUserApi(user) {
+  const response = await request(
+    `http://localhost:8080/users/${user.userId}`,
+    {
+      method: "POST",
+      auth: true,
+      data: {
+        name: user.name,
+        cellphone: user.cellphone,
+        address: user.address,
+        gender: user.gender
+      }
+    });
+  return response.data;
+
+}

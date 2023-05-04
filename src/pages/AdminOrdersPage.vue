@@ -1,7 +1,7 @@
 <template>
-  <div class="userOrdersPage">
+  <div class="adminOrdersPage">
     <UserMenu></UserMenu>
-    <div class="userOrders">
+    <div class="OrderList">
       <ul class="titleBar">
         <li>訂單</li>
         <li>發布日期</li>
@@ -10,12 +10,8 @@
         <li>動作</li>
       </ul>
       <TheSeparateLine></TheSeparateLine>
-      <div style="display: flex; justify-content: center; align-items: center">
-        <h2 v-if="orderList.length == 0">無訂單紀錄</h2>
-      </div>
-
-      <div class="orders" v-for="order in orderList" :key="order.orderId">
-        <ul class="orderItemInfo">
+      <div v-for="order in orderList" :key="order.orderId">
+        <ul class="orderItem">
           <li>{{ order.orderId }}</li>
           <li>{{ order.createdDate.substring(0, 10) }}</li>
           <li>{{ order.status }}</li>
@@ -24,7 +20,7 @@
             <ul class="orderActions">
               <!-- <li>付款</li> -->
               <li @click="order.isVisiable = !order.isVisiable">查看</li>
-              <!-- <li>取消</li> -->
+              <li @click="deleteOrder(order.orderId)">取消</li>
             </ul>
           </li>
         </ul>
@@ -79,81 +75,57 @@ import UserMenu from "../components/UserMenu.vue";
 const store = useStore();
 
 onMounted(() => {
-  store.dispatch("getOrderList");
+  store.dispatch("getAllOrderList");
 });
 
 const orderList = computed(() => {
-  let orderList = store.state.order.orderList;
-  orderList.forEach((order) => {
-    order.isVisiable = false;
-  });
+  let orderList = store.state.order.allOrderList;
+  if (orderList.length !== 0) {
+    orderList.forEach((order) => {
+      order.isVisiable = false;
+    });
+  }
   return orderList;
 });
+
+function deleteOrder(orderId) {
+  var isOptionSelected = confirm("確定取消訂單?");
+  if (isOptionSelected) {
+    store.dispatch("deleteOrder", orderId);
+    store.dispatch("getAllOrderList");
+    location.reload();
+  }
+}
 </script>
 <style scoped>
-.userOrdersPage {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.userOrders {
-  width: 600px;
-}
-.userOrders li {
+li {
   list-style-type: none;
 }
-.separationLine {
-  width: 100%;
-  border: 1px solid #d1d1d1;
-  margin: 5px 0px;
+.adminOrdersPage {
+  display: flex;
 }
 .titleBar,
-.orderItemInfo {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
-  justify-items: center;
+.orderItem {
+  width: 600px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 40px;
-}
-.orders li {
-  width: 100%;
-  cursor: pointer;
-  display: inline-block;
   text-align: center;
 }
-.orderActions {
-  display: grid;
-  gap: 1px;
-  /* grid-template-rows: 1fr 1fr 1fr; */
-  /* text-align: center; */
+
+.titleBar > li,
+.orderItem > li {
+  width: 100px;
 }
 .orderActions li {
-  /* width: 100%; */
-  /* height: 35px; */
+  width: 100px;
   background: #9d8d6f;
   color: white;
   padding: 10px 0px;
+  margin: 1px 0px;
 }
 
-.orderItems {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.orderItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.separateLine {
-  width: 500px;
-  border-color: #d1d1d14e;
-}
 .orderItemContainer {
-  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

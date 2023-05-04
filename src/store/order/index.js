@@ -1,16 +1,20 @@
-import { createOrderApi, getOrderListApi } from "../../apis/order";
+import { createOrderApi, deleteOrderApi, getAllOrderListApi, getOrderListApi } from "../../apis/order";
 
 export const order = {
   state() {
     return {
       orderList: [],
       deliver: "postOffice",
-      price: 100
+      price: 100,
+      allOrderList: [],
     }
   },
   mutations: {
     setOrderList(state, orderList) {
       state.orderList = orderList;
+    },
+    setAllOrderList(state, orderList) {
+      state.allOrderList = orderList;
     },
   },
   actions: {
@@ -20,6 +24,13 @@ export const order = {
     async getOrderList({ commit }) {
       const orderList = await getOrderListApi();
       commit("setOrderList", orderList);
+    },
+    async getAllOrderList({ commit }) {
+      const orderList = await getAllOrderListApi();
+      commit("setAllOrderList", orderList);
+    },
+    async deleteOrder({ commit }, orderId) {
+      await deleteOrderApi(orderId);
     }
   },
 };

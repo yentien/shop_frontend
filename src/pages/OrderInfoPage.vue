@@ -44,6 +44,7 @@ import { computed, reactive, ref, watch } from "vue";
 import TheSeparateLine from "../components/TheSeparateLine.vue";
 import TheButton from "../components/TheButton.vue";
 import { useStore } from "vuex";
+import { router } from "../routes";
 
 const store = useStore();
 
@@ -81,6 +82,7 @@ watch(sameCheck, (newValue, oldValue) => {
 function confirm() {
   store.dispatch("createOrder", orderData);
   alert("訂單已送出!");
+  router.push(`/user/${user.userId}/orders`);
 }
 </script>
 <style scoped>

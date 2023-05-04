@@ -1,4 +1,5 @@
-import { getProductsApi, getSingleProductApi } from "../../apis/product";
+import { deleteCartProductApi } from "../../apis/cart";
+import { addProductApi, deleteProductApi, getProductsApi, getSingleProductApi, modifyProductApi } from "../../apis/product";
 
 export const product = {
   state() {
@@ -24,6 +25,15 @@ export const product = {
       const singleProduct = await getSingleProductApi(productId);
       commit("setSingleProduct", singleProduct);
     },
+    async addProduct({ commit }, productData) {
+      await addProductApi(productData);
+    },
+    async modifyProduct({ commit }, product) {
+      await modifyProductApi(product);
+    },
+    async deleteProduct({ commit }, productId) {
+      await deleteProductApi(productId);
+    }
   },
   getters: {
     getSingleProduct: state => {

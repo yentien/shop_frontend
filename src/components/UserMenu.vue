@@ -15,27 +15,27 @@
           >訂單紀錄</router-link
         >
       </li>
-      <!-- <li>
+      <li v-if="user.roleName == 'ROLE_ADMIN'">
         <router-link
-          to="/orders"
-          :class="{ currentRoute: $route.name == 'orders' }"
+          to="/admin/orders"
+          :class="{ currentRoute: $route.name == 'adminOrders' }"
           >訂單管理</router-link
         >
       </li>
-      <li>
+      <li v-if="user.roleName == 'ROLE_ADMIN'">
         <router-link
-          to="/users"
-          :class="{ currentRoute: $route.name == 'users' }"
+          to="/admin/users"
+          :class="{ currentRoute: $route.name == 'adminUsers' }"
           >帳號管理</router-link
         >
       </li>
-      <li>
+      <li v-if="user.roleName == 'ROLE_ADMIN'">
         <router-link
-          to="/products"
-          :class="{ currentRoute: $route.name == 'products' }"
+          to="/admin/products"
+          :class="{ currentRoute: $route.name == 'adminProducts' }"
           >商品管理</router-link
         >
-      </li> -->
+      </li>
       <li @click="logout"><a>登出</a></li>
     </ul>
   </div>
