@@ -8,18 +8,14 @@
           class="midLengthInput"
           type="text"
           disabled="disabled"
-          :placeholder="userData.email"
+          :placeholder="user.email"
         />
         <label for="username">用戶名: </label>
-        <input class="midLengthInput" type="text" v-model="userData.name" />
+        <input class="midLengthInput" type="text" v-model="user.name" />
         <label for="cellphone">電話: </label>
-        <input
-          class="midLengthInput"
-          type="text"
-          v-model="userData.cellphone"
-        />
+        <input class="midLengthInput" type="text" v-model="user.cellphone" />
         <label for="address">地址: </label>
-        <input class="longLengthInput" type="text" v-model="userData.address" />
+        <input class="longLengthInput" type="text" v-model="user.address" />
         <label>性別: </label>
         <div class="genderRadios">
           <input
@@ -27,14 +23,14 @@
             name="gender"
             id="male"
             value="male"
-            v-model="userData.gender"
+            v-model="user.gender"
           />男
           <input
             type="radio"
             name="gender"
             id="female"
             value="female"
-            v-model="userData.gender"
+            v-model="user.gender"
           />女
         </div>
         <div class="actions">
@@ -50,25 +46,28 @@
 <script setup>
 import UserMenu from "../components/UserMenu.vue";
 import TheButton from "../components/TheButton.vue";
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive } from "vue";
 import { useStore } from "vuex";
+import { router } from "../routes";
 
 const store = useStore();
 
-const user = computed(() => store.getters.getUser);
+const user = computed(() => {
+  const user = store.state.user.modifyUser;
+  user.userId = router.currentRoute.value.params.userId;
+  return user;
+});
 
-const userData = reactive({
-  email: user.value.email,
-  name: user.value.name,
-  cellphone: user.value.cellphone,
-  address: user.value.address,
-  gender: user.value.gender,
+onMounted(() => {
+  const userId = router.currentRoute.value.params.userId;
+  store.dispatch("getModifyUser", userId);
 });
 
 async function modifyUser() {
-  await store.dispatch("modifyUser", userData);
-  location.reload();
+  await store.dispatch("adminModifyUser", user.value);
+  // location.reload();
   alert("已儲存變更!");
+  router.push(`/admin/users`);
 }
 
 function refreshPage() {

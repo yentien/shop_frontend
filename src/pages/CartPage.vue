@@ -226,7 +226,7 @@ function updateTotalAmount() {
 }
 
 function CheckOut(userId) {
-  if (cartProductList.length > 0) {
+  if (cartProductList.value.length > 0) {
     router.push(`/user/${userId}/ordersInfo`);
   } else {
     alert("購物車沒有商品!");

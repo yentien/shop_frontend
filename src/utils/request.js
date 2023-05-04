@@ -8,7 +8,7 @@ export async function request(
   { method = "GET", data, headers, auth = true } = {}
 ) {
   try {
-    const res = await axios({
+    let res = await axios({
       method: method,
       url: url,
       headers: {
@@ -19,8 +19,10 @@ export async function request(
       },
       ...(data && { data: JSON.stringify(data) }),
     });
+    res.error = true;
     return res;
   } catch (error) {
+    const res = { error: true };
     if (error.response.status === 401) {
       if (router.currentRoute.value.fullPath === "/login") {
         alert("帳號或密碼有誤!")
@@ -30,5 +32,6 @@ export async function request(
         router.push("/login");
       }
     }
+    return res;
   }
 }

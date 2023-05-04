@@ -1,7 +1,7 @@
 <template>
   <div class="productPage">
     <div class="productImg">
-      <img :src="singleProduct.imgUrl" alt="" />
+      <img :src="singleProduct.imageUrl" alt="" />
     </div>
     <div class="productInfo">
       <h1>{{ singleProduct.productName }}</h1>
