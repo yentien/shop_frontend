@@ -53,19 +53,26 @@ async function register() {
     alert("請先閱讀並同意隱私協議和使用規範");
     return;
   }
-
-  await store.dispatch("registerUser", {
-    email: email.value,
-    username: username.value,
-    password: password.value,
-  });
-  router.replace("/");
+  if (email.value === "" || password.value === "") {
+    alert("帳號和密碼不能為空!");
+  } else if (password.value.length < 8) {
+    alert("密碼至少8碼!");
+  } else {
+    await store.dispatch("registerUser", {
+      email: email.value,
+      username: username.value,
+      password: password.value,
+    });
+    router.replace("/");
+  }
 }
 
 async function login() {
+  console.log(password.value.length);
   if (email.value === "" || password.value === "") {
     alert("帳號和密碼不能為空!");
   } else {
+    console.log(password.value.length);
     await store.dispatch("loginUser", {
       email: email.value,
       password: password.value,
