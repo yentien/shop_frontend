@@ -68,11 +68,9 @@ async function register() {
 }
 
 async function login() {
-  console.log(password.value.length);
   if (email.value === "" || password.value === "") {
     alert("帳號和密碼不能為空!");
   } else {
-    console.log(password.value.length);
     await store.dispatch("loginUser", {
       email: email.value,
       password: password.value,
