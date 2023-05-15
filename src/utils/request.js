@@ -19,7 +19,7 @@ export async function request(
       },
       ...(data && { data: JSON.stringify(data) }),
     });
-    res.error = true;
+    res.error = false;
     return res;
   } catch (error) {
     const res = { error: true };
