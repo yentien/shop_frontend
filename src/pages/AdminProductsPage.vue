@@ -22,7 +22,11 @@
       <div class="productList" v-for="product in productList" :key="product.id">
         <ul class="productItem">
           <li @click="modifyProduct(product.productId)">
-            <img :src="product.imageUrl" alt="" style="background: #eee" />
+            <img
+              :src="product.imageUrl"
+              alt=""
+              style="background: #eee; width: 80px; height: 50px"
+            />
           </li>
           <li @click="modifyProduct(product.productId)">
             {{ product.productName }}
@@ -39,7 +43,7 @@
             <img
               src="../assets/trashCan.svg"
               alt=""
-              style="width: 20%"
+              style="width: 20px"
               @click="deleteProudct(product.productId)"
             />
           </li>

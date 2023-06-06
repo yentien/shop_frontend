@@ -22,10 +22,9 @@
 <script setup>
 import TheAmountControl from "../components/TheAmountControl.vue";
 import TheButton from "../components/TheButton.vue";
-import { computed, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { router } from "../routes";
 import { useStore } from "vuex";
-import { addItemToCartApi } from "../apis/cart";
 
 const store = useStore();
 

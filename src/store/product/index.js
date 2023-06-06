@@ -6,6 +6,7 @@ export const product = {
     return {
       productList: [],
       singleProduct: {},
+      pageInfo: {}
     }
   },
   mutations: {
@@ -14,16 +15,20 @@ export const product = {
     },
     setSingleProduct(state, singleProduct) {
       state.singleProduct = singleProduct;
+    },
+    setPageInfo(state, pageInfo) {
+      state.pageInfo = pageInfo;
     }
   },
   actions: {
-    async getProducts({ commit }) {
-      const productList = await getProductsApi();
-      commit("setProductList", productList);
+    async getProducts({ commit }, pageFilter) {
+      const result = await getProductsApi(pageFilter);
+      commit("setProductList", result.data);
+      commit("setPageInfo", result.pageInfo)
     },
     async getSingleProduct({ commit }, { productId }) {
-      const singleProduct = await getSingleProductApi(productId);
-      commit("setSingleProduct", singleProduct);
+      const result = await getSingleProductApi(productId);
+      commit("setSingleProduct", result.data);
     },
     async addProduct({ commit }, productData) {
       await addProductApi(productData);

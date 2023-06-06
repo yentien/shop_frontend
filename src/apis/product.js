@@ -44,12 +44,15 @@ export async function addProductApi(product) {
   return result.data;
 }
 
-export async function getProductsApi() {
-  const result = await request("http://localhost:8080/products", {
-    method: "GET",
-    auth: false,
-    data: {}
-  });
+export async function getProductsApi(productFilter) {
+  console.log(productFilter.currentPage)
+  const result = await request(
+    `http://localhost:8080/products?currentPage=${productFilter.currentPage}&category=${productFilter.category}`,
+    {
+      method: "GET",
+      auth: false,
+      data: {}
+    });
   return result.data;
 }
 
